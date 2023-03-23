@@ -49,22 +49,27 @@ const scrapper = async () => {
     // );
 
     if (scrappedData && scrappedData.length > 0) {
-      connection.connect((err) =>  {
-        if (err) throw err;
+        // Check connection status
+        // if(connection.state === 'disconnected'){
+        //     return console.log(null, { status: 'fail', message: 'server down'});
+        // }
 
-        var map_data = scrappedData.map(data => [data.NEGERI, data.LOKALI, data.KES, data.TARIKH, data.TEMPOH])
-        var sql = `INSERT INTO hotspot_loc (state, address, cumulative_case, epidemic_start_date, epidemic_period) values ?`;
+        connection.connect((err) =>  {
+            if (err) throw err;
 
-        connection.query('TRUNCATE TABLE hotspot_loc', (err) => {
-          if (err) throw err;
+            var map_data = scrappedData.map(data => [data.NEGERI, data.LOKALI, data.KES, data.TARIKH, data.TEMPOH])
+            var sql = `INSERT INTO hotspot_loc (state, address, cumulative_case, epidemic_start_date, epidemic_period) values ?`;
+
+            connection.query('TRUNCATE TABLE hotspot_loc', (err) => {
+            if (err) throw err;
+            });
+            connection.query(sql, [map_data], (err) => {
+            if (err) throw err;
+            });
+
+            update_coordinate();
+
         });
-        connection.query(sql, [map_data], (err) => {
-          if (err) throw err;
-        });
-
-        update_coordinate();
-
-      });
     }
   } catch (error) {
     console.log(error);
