@@ -34,6 +34,8 @@ const scrapper = async () => {
         .text();
       scrappedData.push(scrappedItem);
     });
+
+    // Uncomment this code if you want to create a json file.
     // fs.writeFile(
     //   "scrapedInfo.json",
     //   JSON.stringify(scrappedData, null, 2),
