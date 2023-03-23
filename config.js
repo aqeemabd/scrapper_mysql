@@ -5,8 +5,8 @@ const config = {
         password: "",
         database: "idengue"
     },
-    google_key: "AIzaSyAwJVyUNy3NwVFuwDzl5uziN0Z27ZLgKZA",
+    google_key: "",
     scrape_url: "https://idengue.mysa.gov.my/hotspotutama.php"
 }
 
-module.exports = config;
+module.exports = config; 
