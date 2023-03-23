@@ -12,7 +12,7 @@ router.get("/all", (req, res, next) => {
     }
 
     connection.query(
-      "SELECT * FROM hotspot_loc WHERE latitude IS NULL AND longitude IS NULL",
+      "SELECT * FROM hotspot_loc WHERE latitude IS NOT NULL AND longitude IS NOT NULL",
       async (err, result, fields) => {
         if (err) throw err;
         res.json(await result);
